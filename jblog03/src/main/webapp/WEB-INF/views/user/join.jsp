@@ -13,12 +13,19 @@
 	<div class="center-content">
 		<h1 class="logo">JBlog</h1>
 		<ul class="menu">
-			<li><a href="">로그인</a></li>
-			<li><a href="">회원가입</a></li>
-			<li><a href="">로그아웃</a></li>
-			<li><a href="">내블로그</a></li>
+		<c:choose>
+					<c:when test="${empty authUser }">
+						<li><a href="${pageContext.request.contextPath}/user/login">로그인</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/join">회원가입</a></li>					
+					</c:when>
+					<c:otherwise>
+						<li><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/gwangjae">내블로그</a></li>
+						<li>${authUser.name }님 안녕하세요 ^^;</li>
+					</c:otherwise>
+		</c:choose>
 		</ul>
-		<form class="join-form" id="join-form" method="post" action="">
+		<form class="join-form" id="join-form" method="post" action="${pageContext.request.contextPath}/user/join">
 			<label class="block-label" for="name">이름</label>
 			<input id="name"name="name" type="text" value="">
 			
@@ -35,7 +42,6 @@
 				<input id="agree-prov" type="checkbox" name="agreeProv" value="y">
 				<label class="l-float">서비스 약관에 동의합니다.</label>
 			</fieldset>
-
 			<input type="submit" value="가입하기">
 
 		</form>

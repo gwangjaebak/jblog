@@ -2,7 +2,11 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
+		<typeAlias type="com.poscoict.jblog.vo.UserVo" alias="uservo"/>
+		<typeAlias type="com.poscoict.jblog.vo.BlogVo" alias="blogvo"/>
 	</typeAliases>
 	<mappers>
+		<mapper resource="mybatis/mappers/user.xml" />
+		<mapper resource="mybatis/mappers/blog.xml" />
 	</mappers>
 </configuration>
