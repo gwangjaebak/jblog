@@ -15,23 +15,25 @@
 		<div id="wrapper">
 			<div id="content" class="full-screen">
 				<ul class="admin-menu">
-					<li class="selected"><a href="${pageContext.request.contextPath}/blog/${authUser.id}/admin/basic">기본설정</li>
-					<li><a href="${pageContext.request.contextPath}/blog/${authUser.id}/admin/category">카테고리</a></li>
-					<li><a href="${pageContext.request.contextPath}/blog/${authUser.id}/admin/write">글작성</a></li>
+					<li class="selected"><a href="${pageContext.request.contextPath}/${authUser.id}/admin/basic">기본설정</li>
+					<li><a href="${pageContext.request.contextPath}/${authUser.id}/admin/category">카테고리</a></li>
+					<li><a href="${pageContext.request.contextPath}/${authUser.id}/admin/write">글작성</a></li>
 				</ul>
-				<form action="" method="post">
+				<form action="${pageContext.request.contextPath}/${authUser.id}/admin/updatesetting" method="post" enctype="multipart/form-data">
 	 		      	<table class="admin-config">
 			      		<tr>
-			      			<td class="t">${blog.title }</td>
-			      			<td><input type="text" size="40" name="title"></td>
+			      			<td class="t">블로그 이름</td>
+			      			<td><input type="text" size="40" name="title" value="${blog.title }">
+			      			<input type="hidden" name="id" value="${blog.user_id }" /></td>
 			      		</tr>
 			      		<tr>
 			      			<td class="t">로고이미지</td>
-			      			<td><img src="${pageContext.request.contextPath}${blog.profile}"></td>      			
+			      			<td><img src="${pageContext.request.contextPath}${blog.logo }">
+			      			<input type="hidden" name="logo" value="${blog.logo }" />
 			      		</tr>      		
 			      		<tr>
 			      			<td class="t">&nbsp;</td>
-			      			<td><input type="file" name="logo-file"></td>      			
+			      			<td><input type="file" name="file"></td>      			
 			      		</tr>           		
 			      		<tr>
 			      			<td class="t">&nbsp;</td>

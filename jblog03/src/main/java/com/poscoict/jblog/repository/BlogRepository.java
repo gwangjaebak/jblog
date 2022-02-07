@@ -12,12 +12,12 @@ public class BlogRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public BlogVo find() {
-		return sqlSession.selectOne("blog.find");
+	public BlogVo find(BlogVo vo) {
+		return sqlSession.selectOne("blog.findById", vo);
 	}
 
-	public int update(BlogVo blog) {
-		return sqlSession.update("blog.update", blog);
+	public int update(BlogVo vo) {
+		return sqlSession.update("blog.update", vo);
 	}
 
 }

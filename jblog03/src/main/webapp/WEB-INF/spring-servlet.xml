@@ -19,8 +19,15 @@
 	<mvc:default-servlet-handler />
 
 	<!-- mvc url-resource mapping -->
+	<mvc:resources mapping="/images/**" location="file:/upload-images/" />
 	
 	<!-- Interceptors -->
+	<mvc:interceptors>	
+		<mvc:interceptor>
+				<mvc:mapping path="/**" />
+				<bean class="com.poscoict.jblog.interceptor.BlogInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>	
 	
 	<!-- ViewResolver -->
 	<bean id="viewResolver"
