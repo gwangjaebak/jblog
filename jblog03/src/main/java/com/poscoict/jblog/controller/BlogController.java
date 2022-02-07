@@ -14,6 +14,7 @@ import com.poscoict.jblog.service.BlogService;
 import com.poscoict.jblog.vo.BlogVo;
 
 @Controller
+@RequestMapping("/blog")
 public class BlogController {
 	
 	@Autowired
@@ -25,14 +26,24 @@ public class BlogController {
 	@Autowired
 	private FileUploadService fileUploadService;
 	
-	@RequestMapping("/{id}/admin/basic")
-	public String main(Model model) {
-		BlogVo blog = blogService.getSite();
-		System.out.println(blog.getLogo());
-		System.out.println(blog.getTitle());
-		System.out.println(blog.getUser_id());
-		model.addAttribute("blog", blog);
+	@RequestMapping(value="/{id}")
+	public String blog() {
+		return "blog/blog-main";
+	}
+	
+	@RequestMapping(value="/{id}/admin/basic")
+	public String blog_basic(Model model) {
 		return "blog/blog-admin-basic";
+	}
+	
+	@RequestMapping(value="/{id}/admin/category")
+	public String blog_admin_category(Model model) {
+		return "blog/blog-admin-category";
+	}
+	
+	@RequestMapping(value="/{id}/admin/write")
+	public String blog_admin_write(Model model) {
+		return "blog/blog-admin-write";
 	}
 
 	@RequestMapping("/main/update")
