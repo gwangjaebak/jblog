@@ -87,5 +87,4 @@ public class BlogController {
 		servletContext.setAttribute("blog", vo);
 		return "blog/blog-admin-basic";
 	}
-	
 }
