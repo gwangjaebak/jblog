@@ -17,7 +17,7 @@
 				<ul class="admin-menu">
 					<li class="selected"><a href="${pageContext.request.contextPath}/blog/${authUser.id}/admin/basic">기본설정</li>
 					<li><a href="${pageContext.request.contextPath}/blog/${authUser.id}/admin/category">카테고리</a></li>
-					<li><a href="${pageContext.req uest.contextPath}/blog/${authUser.id}/admin/write">글작성</a></li>
+					<li><a href="${pageContext.request.contextPath}/blog/${authUser.id}/admin/write">글작성</a></li>
 				</ul>
 				<form action="" method="post">
 			      	<table class="admin-cat-write">

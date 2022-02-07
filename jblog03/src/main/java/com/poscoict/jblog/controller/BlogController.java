@@ -14,7 +14,7 @@ import com.poscoict.jblog.service.BlogService;
 import com.poscoict.jblog.vo.BlogVo;
 
 @Controller
-@RequestMapping("/blog")
+@RequestMapping("/blog")	//	/id
 public class BlogController {
 	
 	@Autowired
@@ -31,8 +31,24 @@ public class BlogController {
 		return "blog/blog-main";
 	}
 	
-	@RequestMapping(value="/{id}/admin/basic")
-	public String blog_basic(Model model) {
+	@RequestMapping(value="/{id}/admin")
+	public String blog_basic(Model model) {	//@PathVariable("id") String id...
+		//....
+		//....
+		return "blog/blog-admin-basic";
+	}
+	
+	@RequestMapping(value="/{id}/{categoryNo}")
+	public String index2(Model model) {	//@PathVariable("id") String id...
+		//....
+		//....
+		return "blog/blog-admin-basic";
+	}
+	
+	@RequestMapping(value="/{id}/{categoryNo}/{postNo}")	//"", "/{categoryNo}", "/{categoryNo}/{postNo}"
+	public String index3(Model model) {	//@PathVariable("id") String id...
+		//....
+		//....
 		return "blog/blog-admin-basic";
 	}
 	
