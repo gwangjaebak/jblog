@@ -12,5 +12,11 @@
 			update blog set title=#{title }, logo=#{logo } where user_id=#{user_id }
 		]]>
 	</select>
+	
+	<select id="findAll" resultType="blogvo">
+		<![CDATA[
+		   select * from category
+		]]>
+	</select>
 
 </mapper>

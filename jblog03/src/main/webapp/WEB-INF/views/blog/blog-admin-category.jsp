@@ -21,7 +21,7 @@
 				</ul>
 		      	<table class="admin-cat">
 		      		<tr>
-		      			<th>번호</th>
+		      			<th>${list.name}</th>
 		      			<th>카테고리명</th>
 		      			<th>포스트 수</th>
 		      			<th>설명</th>
@@ -47,7 +47,7 @@
 						<td>15</td>
 						<td>어쩌구 저쩌구</td>
 						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>					  
+					</tr>
 				</table>
 				
       	
