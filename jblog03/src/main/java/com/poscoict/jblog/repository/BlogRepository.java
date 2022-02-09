@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.poscoict.jblog.vo.BlogVo;
 import com.poscoict.jblog.vo.CategoryVo;
+import com.poscoict.jblog.vo.PostVo;
 
 @Repository
 public class BlogRepository {
@@ -35,10 +36,10 @@ public class BlogRepository {
 	}
 
 	public int addById(CategoryVo vo) {
-		return sqlSession.insert("blog.insert", vo);
+		return sqlSession.insert("blog.insertCategory", vo);
 	}
 
-	public CategoryVo findOneById(String id) {
-		return sqlSession.selectOne("blog.findOneById", id);
+	public int addPost(PostVo vo) {
+		return sqlSession.insert("blog.insertPost", vo);
 	}
 }

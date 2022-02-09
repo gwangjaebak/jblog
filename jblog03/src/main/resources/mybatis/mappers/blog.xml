@@ -16,17 +16,12 @@
 		   select no, name, description, blog_id from category where blog_id=#{id}
 		]]>
 	</select>
-	<select id="findOneById" parameterType="String" resultType="categoryvo">
-		<![CDATA[
-		   select no, name, description, blog_id from category where blog_id=#{id}
-		]]>
-	</select>
 	<delete id="delete" parameterType="categoryvo" > 
 		<![CDATA[
 		delete from category where no = #{no }
 		]]>	
 	</delete>
-	<insert id="insert" parameterType="categoryvo">
+	<insert id="insertCategory" parameterType="categoryvo">
 		<![CDATA[
 		insert
 		  into category
@@ -34,6 +29,17 @@
 			#{name },
 			#{description },
 			#{blog_id })			
+		]]>
+	</insert>
+	<insert id="insertPost" parameterType="postvo">
+		<![CDATA[
+		insert
+		  into post
+		values (null,
+			#{title },
+			#{contents },
+			now(),
+			#{category_no })			
 		]]>
 	</insert>
 </mapper>

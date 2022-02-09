@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.poscoict.jblog.repository.BlogRepository;
 import com.poscoict.jblog.vo.BlogVo;
 import com.poscoict.jblog.vo.CategoryVo;
+import com.poscoict.jblog.vo.PostVo;
 
 @Service
 public class BlogService {
@@ -35,9 +36,9 @@ public class BlogService {
 	public boolean addCategoryById(CategoryVo vo) {
 		return blogRepository.addById(vo) == 1;
 	}
-	
-	public CategoryVo getOndeById(String id) {
-		return blogRepository.findOneById(id);
+
+	public boolean addPost(PostVo vo) {
+		return blogRepository.addPost(vo) == 1;
 	}
 
 }

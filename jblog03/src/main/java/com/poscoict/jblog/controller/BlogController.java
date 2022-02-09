@@ -17,6 +17,7 @@ import com.poscoict.jblog.service.BlogService;
 import com.poscoict.jblog.service.FileUploadService;
 import com.poscoict.jblog.vo.BlogVo;
 import com.poscoict.jblog.vo.CategoryVo;
+import com.poscoict.jblog.vo.PostVo;
 
 @Controller
 @RequestMapping({"/{id:(?!assets|images).*}"})	//	/{id:.*} or /{id:(?!assets).*} 
@@ -70,7 +71,6 @@ public class BlogController {
 	@RequestMapping(value="/admin/category")
 	public String categoryListById(Model model,
 			@PathVariable("id") String id) {
-		
 		List<CategoryVo> list = blogService.getContentsListById(id);
 		model.addAttribute("list", list);
 		return "blog/blog-admin-category";
@@ -79,7 +79,7 @@ public class BlogController {
 	@RequestMapping(value="/admin/write")
 	public String blog_admin_write(Model model,
 			@PathVariable("id") String id) {
-		model.addAttribute("cate", blogService.getOndeById(id));
+		model.addAttribute("cate", blogService.getContentsListById(id));
 		return "blog/blog-admin-write";
 	}
 
@@ -89,12 +89,10 @@ public class BlogController {
 			@PathVariable("id") String id,
 			@RequestParam("file") MultipartFile file) {
 		String profile = fileUploadService.restore(file);
-		System.out.println("profile:" + profile);
 		if(profile != null) {
 			vo.setLogo(profile);
 		}
 		vo.setUser_id(id);
-		System.out.println("vo:" + vo);
 		blogService.update(vo);
 		return "redirect:/" + id;
 	}
@@ -116,10 +114,9 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value="/admin/write/add")
-	public String add_write(CategoryVo vo,
+	public String add_write(PostVo vo,
 			@PathVariable("id") String id) {
-		vo.setBlog_id(id);
-		blogService.addCategoryById(vo);
+		blogService.addPost(vo);
 		return "redirect:/" + id;
 	}
 }

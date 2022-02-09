@@ -19,19 +19,23 @@
 					<li><a href="${pageContext.request.contextPath}/${authUser.id}/admin/category">카테고리</a></li>
 					<li><a href="${pageContext.request.contextPath}/${authUser.id}/admin/write">글작성</a></li>
 				</ul>
-				<form action="" method="post">
+				<form action="${pageContext.request.contextPath}/${authUser.id}/admin/write/add">
 			      	<table class="admin-cat-write">
 			      		<tr>
 			      			<td class="t">제목</td>
 			      			<td><input type="text" size="60" name="title">
-				      			<select name="category">
-				      				<option value="">미분류</option>
-				      			</select>
+			      			<select name="category_no">
+				      			<c:forEach items="${cate}"	var="cate" varStatus="status">
+					      			
+					      				<option value="${cate.no}">${cate.name}</option>
+					      			
+					      		</c:forEach>
+					      	</select>
 				      		</td>
 			      		</tr>
 			      		<tr>
 			      			<td class="t">내용</td>
-			      			<td><textarea name="content"></textarea></td>
+			      			<td><textarea name="contents"></textarea></td>
 			      		</tr>
 			      		<tr>
 			      			<td>&nbsp;</td>
