@@ -22,12 +22,12 @@
 	<mvc:resources mapping="/images/**" location="file:/upload-images/" />
 	
 	<!-- Interceptors -->
-	<mvc:interceptors>	
+<!-- 	<mvc:interceptors>	
 		<mvc:interceptor>
 				<mvc:mapping path="/**" />
 				<bean class="com.poscoict.jblog.interceptor.BlogInterceptor"/>
 		</mvc:interceptor>
-	</mvc:interceptors>	
+	</mvc:interceptors>	 -->
 	
 	<!-- ViewResolver -->
 	<bean id="viewResolver"

@@ -23,11 +23,9 @@
 			      	<table class="admin-cat-write">
 			      		<tr>
 			      			<td class="t">제목</td>
-			      			<td>
-			      				<input type="text" size="60" name="title">
+			      			<td><input type="text" size="60" name="title">
 				      			<select name="category">
-				      				<option>미분류</option>
-				      				<option>자바</option>
+				      				<option value="">미분류</option>
 				      			</select>
 				      		</td>
 			      		</tr>

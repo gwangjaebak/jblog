@@ -3,20 +3,37 @@
 <mapper namespace="blog">
 	<select id="findById" resultType="blogvo">
 		<![CDATA[
-		   select title, logo, user_id from blog where user_id = #{user_id }
+		   select title, logo, user_id from blog where user_id = #{id}
 		]]>
 	</select>
-
 	<select id="update" resultType="blogvo">
 		<![CDATA[
 			update blog set title=#{title }, logo=#{logo } where user_id=#{user_id }
 		]]>
 	</select>
-	
-	<select id="findAll" resultType="blogvo">
+	<select id="findAll" parameterType="String" resultType="categoryvo">
 		<![CDATA[
-		   select * from category
+		   select no, name, description, blog_id from category where blog_id=#{id}
 		]]>
 	</select>
-
+	<select id="findOneById" parameterType="String" resultType="categoryvo">
+		<![CDATA[
+		   select no, name, description, blog_id from category where blog_id=#{id}
+		]]>
+	</select>
+	<delete id="delete" parameterType="categoryvo" > 
+		<![CDATA[
+		delete from category where no = #{no }
+		]]>	
+	</delete>
+	<insert id="insert" parameterType="categoryvo">
+		<![CDATA[
+		insert
+		  into category
+		values (null,
+			#{name },
+			#{description },
+			#{blog_id })			
+		]]>
+	</insert>
 </mapper>
