@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="blog">
+	<select id="findById" resultType="blogvo">
+		<![CDATA[
+		   select title, logo, user_id from blog where user_id = #{id}
+		]]>
+	</select>
+	<select id="update" resultType="blogvo">
+		<![CDATA[
+			update blog set title=#{title }, logo=#{logo } where user_id=#{user_id }
+		]]>
+	</select>
+	<delete id="delete" parameterType="categoryvo" > 
+		<![CDATA[
+		delete from category where no = #{no }
+		]]>	
+	</delete>
+	<insert id="insertCategory" parameterType="categoryvo">
+		<![CDATA[
+		insert
+		  into category
+		values (null,
+			#{name },
+			#{description },
+			#{blog_id })			
+		]]>
+	</insert>
+	<insert id="insertPost" parameterType="postvo">
+		<![CDATA[
+		insert
+		  into post
+		values (null,
+			#{title },
+			#{contents },
+			now(),
+			#{category_no })			
+		]]>
+	</insert>
+	<select id="findCategoryById" parameterType="String" resultType="categoryvo">
+		<![CDATA[
+		select c.no, c.name, c.description, c.blog_id, count(p.no) as count from category c
+               left join post p on p.category_no = c.no
+               where c.blog_id=#{id} group by c.no order by c.no asc
+		]]>
+	</select>
+	<select id="findPostList" parameterType="Long" resultType="postvo">
+		<![CDATA[
+		select no, title, contents, reg_date, category_no from post where category_no = #{category_no} 
+		]]>
+	</select>
+	<select id="getPostOne" parameterType="Long" resultType="postvo">
+		<![CDATA[
+		select title, contents from post where no=#{postNo}
+		]]>
+	</select>
+</mapper>
