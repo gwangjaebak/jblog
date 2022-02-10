@@ -35,6 +35,4 @@ public class BlogWebApplicationInitializer extends AbstractAnnotationConfigDispa
 	   protected void customizeRegistration(Dynamic registration) {
 	      registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
 	   }
-	
-	
 }
