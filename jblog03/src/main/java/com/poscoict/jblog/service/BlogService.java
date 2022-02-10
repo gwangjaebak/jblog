@@ -29,8 +29,8 @@ public class BlogService {
 		return blogRepository.update(vo) == 1;
 	}
 	
-	public List<CategoryVo> getContentsListById(String id) {
-		return blogRepository.findAll(id);
+	public List<CategoryVo> getCategoryById(String id) {
+		return blogRepository.findCategoryById(id);
 	}
 
 	public boolean addCategoryById(CategoryVo vo) {
@@ -39,6 +39,14 @@ public class BlogService {
 
 	public boolean addPost(PostVo vo) {
 		return blogRepository.addPost(vo) == 1;
+	}
+	
+	public List<PostVo> getPostByCateNo(Long categoryNo) {
+		return blogRepository.findPostList(categoryNo);
+	}
+
+	public PostVo getPostOne(Long postNo) {
+		return blogRepository.getPostOne(postNo);
 	}
 
 }

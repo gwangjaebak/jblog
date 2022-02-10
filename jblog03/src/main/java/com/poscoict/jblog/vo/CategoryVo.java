@@ -5,6 +5,7 @@ public class CategoryVo {
 	private String name;
 	private String description;
 	private String blog_id;
+	private Long count;
 	
 	public Long getNo() {
 		return no;
@@ -30,7 +31,12 @@ public class CategoryVo {
 	public void setBlog_id(String blog_id) {
 		this.blog_id = blog_id;
 	}
-	
+	public Long getCount() {
+		return count;
+	}
+	public void setCount(Long count) {
+		this.count = count;
+	}
 	@Override
 	public String toString() {
 		return "CategoryVo [no=" + no + ", name=" + name + ", description=" + description + ", blog_id=" + blog_id

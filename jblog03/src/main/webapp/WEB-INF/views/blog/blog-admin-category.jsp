@@ -31,10 +31,14 @@
 					<tr>
 						<td>${status.index + 1}</td>
 						<td>${vo.name }</td>
-						<td>0</td>
+						<td>${vo.count }</td>
 						<td>${vo.description }</td>
 						<td>
-						<a href="${pageContext.request.contextPath }/${vo.blog_id}/admin/category/delete/${vo.no }" style="background-image:url(${pageContext.request.contextPath}/assets/images/delete.jpg)">삭</a>
+						<c:choose>
+							<c:when test="${vo.count == 0 }">
+								<a href="${pageContext.request.contextPath }/${vo.blog_id}/admin/category/delete/${vo.no }" style="background-image:url(${pageContext.request.contextPath}/assets/images/delete.jpg)">삭</a>
+							</c:when>
+						</c:choose>
 						</td>
 					</tr>
 					</c:forEach>
@@ -59,11 +63,7 @@
 		      	</form>
 			</div>
 		</div>
-		<div id="footer">
-			<p>
-				<strong>Spring 이야기</strong> is powered by JBlog (c)2016
-			</p>
-		</div>
+		<c:import url="/WEB-INF/views/includes/footer.jsp" />
 	</div>
 </body>
 </html>

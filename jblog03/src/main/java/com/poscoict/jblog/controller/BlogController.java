@@ -1,6 +1,7 @@
 package com.poscoict.jblog.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -35,32 +36,39 @@ public class BlogController {
 	@Autowired
 	private HttpSession session;
 	
-	@RequestMapping(value="")
-	public String blog(@PathVariable("id") String id) {
+	@RequestMapping({"", "/{pathNo1}", "/{pathNo1}/{pathNo2}"})
+	public String index3(Model model,
+			@PathVariable("id") String id,
+			@PathVariable("pathNo1") Optional<Long> pathNo1,
+			@PathVariable("pathNo2") Optional<Long> pathNo2) {
+		
+		Long categoryNo = 0L;
+		Long postNo = 0L;
+		
+		if(pathNo2.isPresent()){
+			 categoryNo = pathNo1.get();
+			 postNo = pathNo2.get();
+	
+		} else if (pathNo1.isPresent()){
+			 categoryNo = pathNo1.get();
+
+		}
+		if(categoryNo == 0L) {
+			
+		}
+		List<PostVo> list = blogService.getPostByCateNo(categoryNo);
+		PostVo vo = blogService.getPostOne(postNo);
+		model.addAttribute("post", list);
+		model.addAttribute("postVo", vo);
+		
+//		categoryNo == 0L이면, categoryLIST를 받아와서 categoryNo를 GET(0).getNo
 		session.setAttribute("blog", blogService.getContentsById(id));
-//		model.addAttribute("blog", blogService.getContentsByVo(vo));
+		model.addAttribute("cate", blogService.getCategoryById(id));
+		System.out.println("id : " + id);
+		System.out.println("categoryNo : " + categoryNo);
+		System.out.println("postNo : " + postNo);
 		return "blog/blog-main";
 	}
-	
-//	@RequestMapping({"", "/{pathNo1}", "/{pathNo1}/{pathNo2}"})
-//	public String index3(@PathVariable("id") String id,
-//			@PathVariable("pathNo1") Optional<Long> pathNo1,
-//			@PathVariable("pathNo2") Optional<Long> pathNo2) {
-//		 Long categoryNo = 0L;
-//		 Long postNo = 0L;
-//		 
-//		 if(pathNo2.isPresent()){
-//			 categoryNo = pathNo1.get();
-//			 postNo = pathNo2.get();
-//		 } else if (pathNo1.isPresent()){
-//			 categoryNo = pathNo1.get();
-//		 }
-//		 
-//		 System.out.println("id : " + id);
-//		 System.out.println("categoryNo : " + categoryNo);
-//		 System.out.println("postNo : " + postNo);
-//		return "blog/blog-admin-basic";
-//	}
 	
 	@RequestMapping(value="/admin/basic")
 	public String blog_basic() {
@@ -71,7 +79,8 @@ public class BlogController {
 	@RequestMapping(value="/admin/category")
 	public String categoryListById(Model model,
 			@PathVariable("id") String id) {
-		List<CategoryVo> list = blogService.getContentsListById(id);
+		List<CategoryVo> list = blogService.getCategoryById(id);
+		System.out.println(list);
 		model.addAttribute("list", list);
 		return "blog/blog-admin-category";
 	}
@@ -79,12 +88,12 @@ public class BlogController {
 	@RequestMapping(value="/admin/write")
 	public String blog_admin_write(Model model,
 			@PathVariable("id") String id) {
-		model.addAttribute("cate", blogService.getContentsListById(id));
+		model.addAttribute("cate", blogService.getCategoryById(id));
 		return "blog/blog-admin-write";
 	}
 
 	@RequestMapping("/admin/updatesetting")
-	public String main(
+	public String admin_basic_update(
 			BlogVo vo,
 			@PathVariable("id") String id,
 			@RequestParam("file") MultipartFile file) {
