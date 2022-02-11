@@ -53,21 +53,26 @@ public class BlogController {
 			 
 		}
 		
+		List<CategoryVo> categoryList = blogService.getCategoryById(id);
+		
 		if(categoryNo==0L) {
-			model.addAttribute("cate", blogService.getCategoryById(id));
-		} else if (categoryNo==0L && postNo==0L) {
-			PostVo vo = blogService.getPostOne(postNo);
-			model.addAttribute("postVo", vo);
+			categoryNo=categoryList.get(0).getNo();		
 		}
 		
-		List<PostVo> list = blogService.getPostByCateNo(categoryNo);
+		List<PostVo> list = blogService.getPostByCateNo(categoryNo);		
+		if(postNo==0L) {
+			if(!list.isEmpty()) {
+				postNo=list.get(0).getNo();
+			}
+		}
+		
 		PostVo vo = blogService.getPostOne(postNo);
 		model.addAttribute("post", list);
 		model.addAttribute("postVo", vo);
 		
 //		categoryNo == 0L이면, categoryLIST를 받아와서 categoryNo를 GET(0).getNo
 		session.setAttribute("blog", blogService.getContentsById(id));
-		model.addAttribute("cate", blogService.getCategoryById(id));
+		model.addAttribute("cate", categoryList);
 		System.out.println("id : " + id);
 		System.out.println("categoryNo : " + categoryNo);
 		System.out.println("postNo : " + postNo);
